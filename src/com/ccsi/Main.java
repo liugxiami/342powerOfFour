@@ -1,18 +1,25 @@
-package com.ccsi;
+ppackage com.ccsi;
+
+import java.io.*;
+import java.util.*;
 
 public class Main {
-
     public static void main(String[] args) {
-	    int n=16;
-        System.out.println(isPowerOfFour(n));
+        System.out.println(isPowerOfFour3(16));
     }
-    //Given an integer(signed 32 bits),write a function to check whether ita power of 4
-    public static boolean isPowerOfFour(int num){
-       while(num!=0){
-            if(num==1) return true;
-            if((num&3)!=0)return false;     //判断余数是否为零。
-            num>>>=2;
-        }
-        return false;
+    public static boolean isPowerOfFour1(int num){
+        if(num<0)return false;
+        while(num%4==0)num/=4;
+        return num==1;
+    }
+    public static boolean isPowerOfFour2(int num){
+        if(num<0)return false;
+        while((num&3)==0)num>>>=2;
+        return num==1;
+    }
+    //powerOfTwo的衍生，4的n次方，1出现的位置是1，3，5，7....;也是对......01010101取与不会等于0；
+    public static boolean isPowerOfFour3(int num){
+        if(num<0)return false;
+        return (num&(num-1))==0&&((num&0x55555555)!=0);
     }
 }
